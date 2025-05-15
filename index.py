@@ -1,4 +1,5 @@
 from flask import Flask
+from vercel_wsgi import handle_request
 
 app = Flask(__name__)
 
@@ -6,5 +7,5 @@ app = Flask(__name__)
 def home():
     return "¿Sabías que aprender en red distribuye el conocimiento? ¡Tú también puedes hacerlo!"
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5003)
+def handler(environ, start_response):
+    return handle_request(app, environ, start_response)
