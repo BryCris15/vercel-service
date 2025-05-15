@@ -6,6 +6,6 @@ app = Flask(__name__)
 def home():
     return "¿Sabías que aprender en red distribuye el conocimiento? ¡Tú también puedes hacerlo!"
 
-# Entry point for Vercel
-def handler(request, context):
-    return app(request.environ, start_response=context['start_response'])
+# Vercel espera una función WSGI-style
+def handler(environ, start_response):
+    return app.wsgi_app(environ, start_response)
